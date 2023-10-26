@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #000000;
+}
+
+h1 {
+    color: #333;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 50px;
+}
+
+.object {
+    width: 1000px;
+    height: 1000px;
+    background-color: #666;
+    cursor: pointer;
+}
+
+#object1 {
+    width: 1000px;
+    height: 1000px;
+    font-size: small;
+    background-color: aqua;
+}
+
+#object2 {
+    width: 5000px;
+    height: 5000px;
+    font-size: small;
+    background-color: #999;
+}
+
+#object3 {
+    width: 50px;
+    height: 50px;
+    font-size: small;
+    background-color: #cccccc;
+}

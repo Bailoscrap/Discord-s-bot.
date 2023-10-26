@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Color Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #color-display {
+            font-size: 2em;
+        }
+        #message {
+            font-size: 1.5em;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Color Game</h1>
+    <p>Guess the color based on its RGB value.</p>
+    <div id="color-display">RGB(0, 0, 0)</div>
+    <input type="color" id="color-picker" value="#000000">
+    <button id="check-button">Check</button>
+    <p id="message"></p>
+
+    <script>
+        const colorDisplay = document.getElementById("color-display");
+        const colorPicker = document.getElementById("color-picker");
+        const checkButton = document.getElementById("check-button");
+        const message = document.getElementById("message");
+
+        // Generate a random RGB color
+        function getRandomColor() {
+            const red = Math.floor(Math.random() * 256);
+            const green = Math.floor(Math.random() * 256);
+            const blue = Math.floor(Math.random() * 256);
+            return `RGB(${red}, ${green}, ${blue})`;
+        }
+
+        // Initialize the game
+        let targetColor = getRandomColor();
+        colorDisplay.textContent = targetColor;
+
+        // Check if the picked color is correct
+        checkButton.addEventListener("click", () => {
+            const pickedColor = colorPicker.value.toUpperCase();
+            if (pickedColor === targetColor) {
+                message.textContent = "Correct! Well done!";
+                targetColor = getRandomColor();
+                colorDisplay.textContent = targetColor;
+            } message.textContent = "Correct! Well done!";
+        });
+        
+    </script>
+</body>
+</html>

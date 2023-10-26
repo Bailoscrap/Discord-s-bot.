@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="style.css">
+<html>
+<head>
+    <title>Blacktube Library</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ff0000; /* Red header similar to YouTube */
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        #container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #menu {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        #menu ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #menu ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        #video-container {
+            width: 100%;
+            background-color: #000; /* Black video player similar to YouTube */
+        }
+
+        #description {
+            padding: 20px;
+        }
+
+        #comments {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        #comment-form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        #related-videos {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+        #nav-link {
+    text-decoration: none;
+    color: black;
+    max-width: 300px;
+}
+
+    .bs {
+    color: rgb(36, 88, 231);
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Blacktube Library</h1>
+    </header>
+
+    <div id="menu">
+        <div id="container">
+            <ul>
+                <li><a href="ytform.html" id="nav-link">Home</a></li>
+                <li><a href="ytform.html" id="nav-link">Trending</a></li>
+                <li><a href="ytform.html" id="nav-link">Subscriptions</a></li>
+                <li><a href="ytform.html" id="nav-link">Library</a></li>
+                <li><a href="ytform.html" id="nav-link">History</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="container">
+        <div id="video-container">
+            <video width="100%" controls autoplay>
+                <source src="videoplayback_2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div id="description">
+            <h2>First Tutoriel</h2>
+            <p>This Vidéo explain How to use Godot and Create Your First 2D Games on Godot
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                .<br>
+                <div class="bs">
+                    <a href="#">#Godot</a><br>
+                    <a href="#">#2D_Game<br>
+                        <a href="#">#Bialo_The_Devlopper</a><br>
+                        <a href="#">#Scrap_The_Devlopper</a><br>
+                        <a href="#">#Computer_Game</a><br>
+                        <a href="#">#Mobile_Game</a><br>
+                        <a href="#">#Devloppement</a><br>
+                        <a href="#">#Computer</a><br>
+                        <a href="#">#Pc_Devloppement</a><br>
+                        <a href="#">#Html</a><br>
+                        <a href="#">#Css</a><br>
+                        <a href="#">#C#</a><br>
+                        <a href="#">#js</a><br>
+                        <a href="#">#Java_Script</a>
+                        
+                </div>
+                
+            </p>
+        </div>
+
+        <div id="comments">
+            <h2>Comments</h2>
+            <div id="comment-list">
+                <!-- Commentaires seront affichés ici -->
+            </div>
+        </div>
+
+        <div id="comment-form">
+            <h2>Add a Comment</h2>
+            <form id="comment-form">
+                <input type="text" id="email" placeholder="Your Email"><br>
+                <textarea id="comment" placeholder="Your Comment"></textarea><br>
+                <button type="button" id="submit">Submit</button>
+            </form>
+        </div>
+
+        <div id="related-videos">
+            <h2>Related Videos</h2>
+            <p>List of related videos here.</p>
+        </div>
+    </div>
+
+    <script>
+        const commentForm = document.getElementById("comment-form");
+        const commentList = document.getElementById("comment-list");
+
+        document.getElementById("submit").addEventListener("click", function () {
+            const email = document.getElementById("email").value;
+            const commentText = document.getElementById("comment").value;
+
+            if (email && commentText) {
+                const commentElement = document.createElement("div");
+                commentElement.innerHTML = `<strong>${email}</strong>: ${commentText}`;
+                commentList.appendChild(commentElement);
+
+                // Effacer les champs de texte après avoir soumis le commentaire
+                document.getElementById("email").value = "";
+                document.getElementById("comment").value = "";
+            }
+        });
+    </script>
+</body>
+</html>

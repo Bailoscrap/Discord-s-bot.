@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Character Movement with Bananas and Bombs</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #character {
+            width: 50px;
+            height: 50px;
+            font-size: small;
+            background-color: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .banana {
+            width: 105px;
+            height: 87px;
+            background-image: url(/Monkey/Banane.png);
+            position: absolute;
+        }
+
+        .bomb {
+            width: 100px;
+            height: 50px;
+            background-image: url(/Monkey/Bombes.png);
+            position: absolute;
+        }
+
+        #score {
+            position: absolute;
+            color: white;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+        }
+        #background {
+            position: center;
+            width: 1511px;
+            height: 680px;
+            background-image: url(/Monkey/1.jpg);
+        }
+    </style>
+</head>
+<body>
+    <div id="character"></div>
+    <div id="score">Score: 000000</div>
+    <div id="background"></div>
+    
+
+    <script>
+        const character = document.getElementById("character");
+        let characterX = 110;
+        let characterY = 110;
+        const speed = 20;
+        const keyState = {};
+
+        let score = 0;
+        const scoreElement = document.getElementById("score");
+
+        // Set the initial position of the character
+        character.style.left = characterX + "px";
+        character.style.top = characterY + "px";
+
+        // Function to move the character based on the pressed keys
+        function moveCharacter() {
+            if (keyState["z"] || keyState["w"]) characterY -= speed;
+            if (keyState["s"]) characterY += speed;
+            if (keyState["q"] || keyState["a"]) characterX -= speed;
+            if (keyState["d"]) characterX += speed;
+            character.style.left = characterX + "px";
+            character.style.top = characterY + "px";
+
+            checkCollisions();
+            requestAnimationFrame(moveCharacter);
+        }
+
+        // Event listeners to track key presses and releases
+        document.addEventListener("keydown", (event) => {
+            keyState[event.key] = true;
+        });
+
+        document.addEventListener("keyup", (event) => {
+            keyState[event.key] = false;
+        });
+
+        // Start moving the character
+        moveCharacter();
+
+        function createBanana() {
+            const banana = document.createElement("div");
+            banana.className = "banana";
+            banana.style.left = `${Math.floor(Math.random() * (window.innerWidth - 20))}px`;
+            banana.style.top = "0";
+            document.body.appendChild(banana);
+
+            function animateBanana() {
+                const bananaY = parseInt(banana.style.top, 10);
+                banana.style.top = (bananaY + 2) + "px";
+
+                if (bananaY >= window.innerHeight) {
+                    banana.remove();
+                } else {
+                    requestAnimationFrame(animateBanana);
+                }
+            }
+
+            requestAnimationFrame(animateBanana);
+        }
+
+        function createBomb() {
+            const bomb = document.createElement("div");
+            bomb.className = "bomb";
+            bomb.style.left = `${Math.floor(Math.random() * (window.innerWidth - 20))}px`;
+            bomb.style.top = "0";
+            document.body.appendChild(bomb);
+
+            function animateBomb() {
+                const bombY = parseInt(bomb.style.top, 10);
+                bomb.style.top = (bombY + 2) + "px";
+
+                if (bombY >= window.innerHeight) {
+                    bomb.remove();
+                } else {
+                    requestAnimationFrame(animateBomb);
+                }
+            }
+
+            requestAnimationFrame(animateBomb);
+        }
+
+        function checkCollisions() {
+            const bananas = document.querySelectorAll(".banana");
+            const bombs = document.querySelectorAll(".bomb");
+
+            bananas.forEach((banana) => {
+                if (isColliding(character, banana)) {
+                    score++;
+                    scoreElement.textContent = "Score: 00000" + score;
+                    banana.remove();
+                }
+            });
+
+            bombs.forEach((bomb) => {
+                if (isColliding(character, bomb)) {
+                    score = 0;
+                    scoreElement.textContent = "Score: 0";
+                    bomb.remove();
+                }
+            });
+        }
+
+        function isColliding(elem1, elem2) {
+            const rect1 = elem1.getBoundingClientRect();
+            const rect2 = elem2.getBoundingClientRect();
+            return (
+                rect1.left < rect2.right &&
+                rect1.right > rect2.left &&
+                rect1.top < rect2.bottom &&
+                rect1.bottom > rect2.top
+            );
+        }
+
+        // Create bananas and bombs at intervals
+        setInterval(() => {
+            createBanana();
+            createBomb();
+        }, 3000);
+    </script>
+</body>
+</html>

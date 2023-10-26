@@ -1,0 +1,5 @@
+number 1  : 100
+number 2  : 95
+number 3  : 88
+number 4  : 75
+number 5  : 50
